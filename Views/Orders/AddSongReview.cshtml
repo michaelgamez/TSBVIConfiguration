@@ -1,0 +1,79 @@
+﻿@model IEnumerable<spr21team24finalproject.Models.Song>
+@using spr21team24finalproject.Models
+
+@{
+    ViewData["Title"] = "AddSongReview";
+}
+
+@*<h1>Add Song Review</h1>*@
+@*
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="AddSongReview">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div>
+                    <hr />
+                    <dl class="row">
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.SongTitle)
+                        </dt>
+
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.OrderDate)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.OrderDate)
+                        </dd>
+
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.StatusType)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.StatusType)
+                        </dd>
+
+                    </dl>
+
+                </div>
+
+                <br />
+                <br />
+
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Gift" />
+                    @Html.DisplayNameFor(model => model.Gift)
+                </label>
+                <br />
+                <br />
+
+                If you selected "yes" above, please list the recipient's email below:
+                <br />
+
+                <label asp-for="GiftRecipientEmail" class="control-label"></label>
+                <input asp-for="GiftRecipientEmail" class="form-control" />
+                <span asp-validation-for="GiftRecipientEmail" class="text-danger"></span>
+
+
+
+                <br />
+
+                <label asp-for="CreditCard" class="control-label"></label>
+                <input asp-for="CreditCard" class="form-control" />
+                <span asp-validation-for="CreditCard" class="text-danger"></span>
+                <br />
+                <br />
+
+                <div class="form-group">
+                    <input type="submit" value="Final Checkout" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+
+*@

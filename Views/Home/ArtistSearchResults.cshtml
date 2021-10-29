@@ -1,0 +1,52 @@
+﻿@model IEnumerable<spr21team24finalproject.Models.Artist>
+
+@{
+    ViewData["Title"] = "ArtistSearchResults";
+}
+
+<h1>Bevo's Tunes Artist Search Results</h1>
+
+<form asp-action="Index" asp-controller="Home" method="get">
+    <p class="form-group">
+        <a asp-action="Index" class="btn btn-success">Go Back Home</a>
+    </p>
+</form>
+
+
+<h4>
+    Displaying @ViewBag.SelectedArtists out of @ViewBag.AllArtists Artists
+</h4>
+@*ARTIST TABLE*@
+<br />
+<br />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ArtistName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ArtistAvgRating)
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.ArtistName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ArtistAvgRating)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", "Artists", new { id = item.ArtistID })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

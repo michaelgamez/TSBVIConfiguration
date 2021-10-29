@@ -1,0 +1,46 @@
+﻿
+@model IEnumerable<spr21team24finalproject.Models.Song>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 style="text-align:center;">
+    <h1>Bevo's Tunes</h1>
+</h1>
+
+<form asp-action="DisplaySongSearchResults" asp-controller="Home" method="get">
+
+    <p class="form-group">
+        <div class="btn-group-lg" align ="center">
+
+            <button type="submit" class="btn btn-primary" style="margin: 5px">See Catalog</button>
+            <br />
+            <br />
+            <div align="center">
+                <div>
+                    <div class="btn-group-lg">
+                        <a asp-action="SongDetailedSearch" class="btn btn-secondary" style="margin: 5px">Song Detailed Search</a>
+                        <a asp-action="AlbumDetailedSearch" class="btn btn-secondary" style="margin: 5px">Album Detailed Search</a>
+                        <a asp-action="ArtistDetailedSearch" class="btn btn-secondary" style="margin: 5px">Artist Detailed Search</a>
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            @if (User.IsInRole("Manager"))
+                            {
+                                <a asp-action="FeaturedSongCreate" class="btn btn-secondary" style="margin: 5px">Enter Featured Song and Album</a>
+                                }
+                            }
+                            <a asp-action="FeaturedSongAlbumDisplay" class="btn btn-secondary" style="margin: 5px">Featured Song and Album</a>
+                            </div>
+                </div>
+
+
+
+
+            </div>
+        </div>
+
+    </p>
+</form>
+

@@ -1,0 +1,87 @@
+﻿@model IEnumerable<spr21team24finalproject.Models.Song>
+
+@{
+    ViewData["Title"] = "SongSearchResults";
+}
+
+<h1>Bevo's Tunes Song Search Results</h1>
+
+<form asp-action="Index" asp-controller="Home" method="get">
+    <p class="form-group">
+        <a asp-action="Index" class="btn btn-success">Go Back Home</a>
+    </p>
+</form>
+
+
+<h1>Song Search Results</h1>
+
+<h4>
+    Displaying @ViewBag.SelectedSongs out of @ViewBag.AllSongs Songs
+</h4>
+
+@*SONGS TABLE*@
+
+<br />
+<br />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SongTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Album.AlbumTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Artist.ArtistName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SongAvgRating)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SongDiscountPrice)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            @Html.HiddenFor(modelItem => item.SongID)
+            <td>
+                @Html.DisplayFor(modelItem => item.SongTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Album.AlbumTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Artist.ArtistName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SongAvgRating)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SongDiscountPrice)
+            </td>
+
+
+            <td>
+                @Html.ActionLink("Details", "Details", "Songs", new { id = item.SongID })
+            </td>
+
+            <td>
+                @Html.ActionLink("Add To Order", "AddSongToCart", "SongOrderDetails", new { id = item.SongID })
+            </td>
+            @if (User.Identity.IsAuthenticated)
+            {
+                @if (User.IsInRole("Manager") || User.IsInRole("Employee"))
+                {
+                    <a asp-action="Index" asp-controller="SongReviews">Reviews</a>
+                }
+            }
+
+        </tr>
+        }
+    </tbody>
+</table>

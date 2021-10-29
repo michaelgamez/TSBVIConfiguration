@@ -1,0 +1,59 @@
+﻿@model IEnumerable<spr21team24finalproject.Models.ArtistReview>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            @*<th>
+                @Html.DisplayNameFor(model => model.ArtistAvgRating)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.ArtistRating)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ArtistScoreCount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ArtistScoreSum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ArtistComment)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.ArtistAvgRating)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.ArtistRating)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArtistScoreCount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArtistScoreSum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArtistComment)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ArtistReviewID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ArtistReviewID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ArtistReviewID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

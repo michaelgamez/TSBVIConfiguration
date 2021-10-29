@@ -1,0 +1,78 @@
+﻿
+@model IEnumerable<spr21team24finalproject.Models.Album>
+
+@{
+    ViewData["Title"] = "AlbumSearchResults";
+}
+
+<h1>Bevo's Tunes Album Search Results</h1>
+
+<form asp-action="Index" asp-controller="Home" method="get">
+    <p class="form-group">
+        <a asp-action="Index" class="btn btn-success">Go Back Home</a>
+    </p>
+</form>
+
+
+<h4>
+    Displaying @ViewBag.SelectedAlbums out of @ViewBag.AllAlbums Albums
+</h4>
+
+@*ALBUMS TABLE*@
+<br />
+<br />
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @*@Html.ActionLink("AlbumTitle", "DisplayAlbumSearchResults", new { sortOrder})*@
+                        @Html.DisplayNameFor(model => model.AlbumTitle)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Artist.ArtistName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AlbumAvgRating)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AlbumDiscountPrice)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AlbumTitle)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Artist.ArtistName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AlbumAvgRating)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AlbumDiscountPrice)
+                    </td>
+
+
+                    <td>
+                        @Html.ActionLink("Details", "Details", "Albums", new { id = item.AlbumID })
+                    </td>
+                    <td>
+                        @Html.ActionLink("Add to Order", "AddAlbumToCart", "AlbumOrderDetails", new { id = item.AlbumID })
+                    </td>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        @if (User.IsInRole("Manager") || User.IsInRole("Employee"))
+                        {
+                            <a asp-action="Index" asp-controller="ALbumReviews">Reviews</a>
+                        }
+                    }
+                </tr>
+                }
+            </tbody>
+        </table>
+

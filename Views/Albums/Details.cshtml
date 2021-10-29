@@ -1,0 +1,112 @@
+﻿@model spr21team24finalproject.Models.Album
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Album</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AlbumTitle)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AlbumTitle)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Artist.ArtistName)
+        </dt>
+        <dd class="col-sm-10">
+            <div>
+                @Html.DisplayFor(model => model.Artist.ArtistName)  |
+
+                <td>
+                    <a asp-action="Details" asp-controller="Artists" asp-route-id ="@Model.Artist.ArtistID">Artist Information</a>
+                </td>
+            </div>
+
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Genre.GenreName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Genre.GenreName)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AlbumOriginalPrice)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AlbumOriginalPrice)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AlbumDiscountPrice)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AlbumDiscountPrice)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AlbumAvgRating)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AlbumAvgRating)
+        </dd>
+
+
+
+
+        @*@<dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AlbumReviews)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AlbumReviews)
+        </dd>*@
+
+    </dl>
+    
+    <table class="table table-striped">
+        <tr>
+            <th>Album's Reviews</th>
+        </tr>
+        @foreach (AlbumReview albumReview in Model.AlbumReviews)
+        {
+            @if (albumReview.AlbumReviewStatusType == AlbumReviewStatus.Approved)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => albumReview.AlbumComment)</td>
+                </tr>
+            }
+        }
+    </table>
+    <table class="table table-striped">
+        <tr>
+            <th>Songs in Album</th>
+        </tr>
+        @foreach (Song song in Model.Songs)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => song.SongTitle)</td>
+                <td>@Html.ActionLink("Song Info", "Details", "Songs", new { id = song.SongID })</td>
+
+            </tr>
+        }
+    </table>
+</div>
+
+<div>
+    <td>
+        <a asp-action="Create" asp-controller="AlbumOrderDetails" asp-route-id="@Model.AlbumID">Add to Order</a> 
+    </td> |
+    <a asp-action="AlbumDetailedSearch" asp-controller="Home">New Search</a> |
+    <a asp-action="Index" asp-controller="Home">Back to Home</a>
+    @if (User.Identity.IsAuthenticated && (User.IsInRole("Employee") || User.IsInRole("Manager")))
+    {
+        <span>|</span>
+        <a asp-action="Edit" asp-route-id="@Model.AlbumID">Edit</a>
+    }
+
+</div>

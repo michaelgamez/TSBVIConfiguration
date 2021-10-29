@@ -1,0 +1,47 @@
+﻿@model IEnumerable<spr21team24finalproject.Models.AlbumOrderDetail>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AlbumsOriginalPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AlbumPurchasePrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AlbumTotalPrice)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AlbumsOriginalPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AlbumPurchasePrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AlbumTotalPrice)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.AlbumOrderDetailID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.AlbumOrderDetailID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.AlbumOrderDetailID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

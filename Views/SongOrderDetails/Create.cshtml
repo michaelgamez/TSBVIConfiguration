@@ -1,0 +1,195 @@
+﻿@model spr21team24finalproject.Models.SongOrderDetail
+
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1></h1>
+
+<h4>Confirm Song</h4>
+
+<br />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="ShoppingCart">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            @Html.HiddenFor(model => model.SongOrderDetailID)
+            @Html.HiddenFor(model => model.SongPurchasePrice)
+            @*Should I do this or should it be the original price*@
+            @Html.HiddenFor(model => model.Song.SongOriginalPrice)
+            @Html.HiddenFor(model => model.Order.OrderID)
+
+            @*@Html.HiddenFor(model => model.SongDiscountPrice)
+                @Html.HiddenFor(model => model.SongOrderDetailID)
+                @Html.HiddenFor(model => model.Song)
+                @Html.HiddenFor(model => model.Order.OrderID)*@
+
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Song.SongTitle)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Song.SongTitle)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Song.SongOriginalPrice)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Song.SongOriginalPrice)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Song.SongDiscountPrice)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Song.SongDiscountPrice)
+                </dd>
+            </dl>
+            Would you like to add the selected song to your cart?
+
+            <div class="form-group">
+                <input type="submit" value="Confirm" class="btn btn-primary" />
+            </div>
+        </form>
+
+    </div>
+</div>
+<div>
+
+    <a asp-action="SongDetailedSearch" asp-controller="Home">New Search</a> |
+    <a asp-action="Index" asp-controller="Home">Back to Home</a>
+</div>
+<br />
+<br />
+
+
+
+
+<br />
+<br />
+
+@*<h5>Song Details</h5>
+        <table class="table table-primary">
+            <tr>
+                <th>Song</th>
+                <th>Artist</th>
+                <th>Album</th>
+                <th>Price</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(ModelItem => item.Song.SongTitle)</td>
+                    <td>@Html.DisplayFor(ModelItem => item.Song.Artist.ArtistName)</td>
+                    <td>@Html.DisplayFor(ModelItem => item.Song.Album.AlbumTitle)</td>
+                    <td>@Html.DisplayFor(ModelItem => item.Song.SongDiscountPrice)</td>
+                </tr>
+            }
+        </table>
+
+
+    @*<p>
+            <a asp-action="Index">Continue Browsing More Songs</a>
+            <a asp-action="Create" a asp-controller="Order">Checkout</a>
+        </p>*@
+
+
+@*<div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create" asp-controller="Orders">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                @Html.HiddenFor(model => model.Order.OrderID)
+                <dl class="row">
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.Song.SongTitle)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Song.SongTitle)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.Song.SongOriginalPrice)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Song.SongOriginalPrice)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.Song.SongDiscountPrice)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Song.SongDiscountPrice)
+                    </dd>
+                </dl>
+
+            </form>
+        </div>
+    </div>
+
+
+
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Song.SongTitle)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SongOrderDetailID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SongPurchasePrice)
+                    </th>
+
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in model.SongOrderDetail.Song)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Song.SongTitle)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SongOrderDetailID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SongPurchasePrice)
+                        </td>
+
+                        <td>
+                            <a asp-action="Create" asp-controller="Orders" asp-route-id="@Model.Song.SongID">Edit</a>
+                            @Html.ActionLink("Confirm Item", "Create", "Orders", new { id = item.SongID }
+                            <a asp-action="SongDetailedSearch" asp-controller="Home">New Search</a>
+                        </td>
+                    </tr>
+                }
+
+
+            </tbody>
+        </table>
+
+
+*@
+<!--<div align="center">
+
+<div>
+    <div class="btn-group-lg">-->
+@*//TODO: which one???*@
+@*<a asp-action="Create" asp-controller="Orders" asp-route-id="@Model.SongID">Edit</a>*@
+
+<!--<div class="row">
+                <div class="col-md-4">
+                    <form asp-action="Create" asp-controller="Orders">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <input type="submit" value="Confirm" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+        <a asp-action="SongDetailedSearch" asp-controller="Home">New Search</a>
+    </div>
+</div>-->

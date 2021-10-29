@@ -1,0 +1,116 @@
+﻿@model spr21team24finalproject.Models.Order
+@using spr21team24finalproject.Models
+
+@{
+    ViewData["Title"] = "FinalCheckout";
+}
+
+
+
+<h4>Your order has been placed!</h4>
+@{
+    ViewData["Title"] = "OrderSummary";
+
+}
+<br />
+<br/>
+<h1>Order Summary</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AppUser.FirstName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AppUser.FirstName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AppUser.LastName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AppUser.LastName)
+        </dd>
+    </dl>
+
+</div>
+
+<h5>Songs</h5>
+<table class="table table-primary">
+    <tr>
+        <th>Song</th>
+        <th>Artist</th>
+        <th>Song Rating</th>
+        <th>Original Price</th>
+        <th>Discounted Price</th>
+    </tr>
+    @foreach (SongOrderDetail od in Model.SongOrderDetails)
+    {
+        <tr>
+            <td>@Html.DisplayFor(ModelItem => od.Song.SongTitle)</td>
+            <td>@Html.DisplayFor(ModelItem => od.Song.Artist.ArtistName)</td>
+            <td>@Html.DisplayFor(ModelItem => od.Song.SongAvgRating)</td>
+            <td>@Html.DisplayFor(ModelItem => od.Song.SongOriginalPrice)</td>
+            <td>@Html.DisplayFor(ModelItem => od.Song.SongDiscountPrice)</td>
+            <td>
+                <a asp-action="Details" asp-controller="Songs" asp-route-id=" @od.Song.SongID">Details</a> 
+
+            </td>
+
+        </tr>
+    }
+</table>
+
+
+<h5>Albums</h5>
+<table class="table table-primary">
+    <tr>
+        <th>Album</th>
+        <th>Artist</th>
+        <th>Rating</th>
+        <th>Original Price</th>
+        <th>Discounted Price</th>
+    </tr>
+    @foreach (AlbumOrderDetail od in Model.AlbumOrderDetails)
+    {
+        <tr>
+            <td>@Html.DisplayFor(ModelItem => od.Album.AlbumTitle)</td>
+            <td>@Html.DisplayFor(ModelItem => od.Album.Artist.ArtistName)</td>
+            <td>@Html.DisplayFor(ModelItem => od.Album.AlbumAvgRating)</td>
+            <td>@Html.DisplayFor(ModelItem => od.Album.AlbumOriginalPrice)</td>
+            <td>@Html.DisplayFor(ModelItem => od.Album.AlbumDiscountPrice)</td>
+            <td>
+                <a asp-action="Details" asp-controller="Albums" asp-route-id=" @od.Album.AlbumID">Details</a> |
+
+            </td>
+        </tr>
+    }
+</table>
+
+<h5>Order Summary</h5>
+<table class="table table-sm table-bordered" style="width: 30%">
+    <tr>
+        <th colspan="2" style="text-align:center">Order Summary</th>
+    </tr>
+    <tr>
+        <td>Order Subtotal: </td>
+        <td>@Html.DisplayFor(model => model.OrderSubtotal)</td>
+
+    </tr>
+    <tr>
+        <td>Sales Tax: </td>
+        <td>@Html.DisplayFor(model => model.SalesTax)</td>
+
+    </tr>
+    <tr>
+        <td>Order Total: </td>
+        <td>@Html.DisplayFor(model => model.OrderTotal)</td>
+
+    </tr>
+</table>
+<div>
+</div>
+<hr />
+<div>
+    <a asp-action="Index" asp-controller="Home">Back to Search</a>
+</div>

@@ -1,0 +1,38 @@
+﻿@model IndexViewModel
+@{
+    ViewBag.Title = "Edit Information";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>User Name:</dt>
+        <dd>@Model.UserName</dd>
+
+        <dt>Email:</dt>
+        <dd>@Model.Email</dd>
+
+        <dt>Edit Acccount Information:</dt>
+
+        @if (User.Identity.IsAuthenticated && User.IsInRole("Customer"))
+        {
+            <dd>
+                [@Html.ActionLink("Edit Account Information ", "CustomerEditAccount")]
+            </dd>
+        }
+
+        @if (User.Identity.IsAuthenticated && User.IsInRole("Employee"))
+        {
+            <dd>
+                [@Html.ActionLink("Edit Account Information ", "EmployeeEditAccount")]
+            </dd>
+        }
+
+        <dt>Password:</dt>
+        <dd>
+            [@Html.ActionLink("Change your password", "ChangePassword")]
+        </dd>
+    </dl>
+</div>

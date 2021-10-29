@@ -1,0 +1,52 @@
+﻿@model spr21team24finalproject.Models.SearchViewModel
+
+@{
+    ViewData["Title"] = "AlbumDetailedSearch";
+}
+
+<h1>Album Detailed Search</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="DisplayAlbumSearchResults">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="SearchAlbumTitle" class="control-label"></label>
+                <input asp-for="SearchAlbumTitle" class="form-control" />
+                <span asp-validation-for="SearchAlbumTitle" class="text-danger"></span>
+            </div>
+          
+            <div class="form-group">
+                <label asp-for="SearchArtistName" class="control-label"></label>
+                <input asp-for="SearchArtistName" class="form-control" />
+                <span asp-validation-for="SearchArtistName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SearchGenre" class="control-label"></label>
+                @Html.DropDownListFor(model => model.SearchGenre, (SelectList)ViewBag.AllGenres, new { @class = "form-control" })
+                <span asp-validation-for="SearchGenre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SearchRatingType" class="control-label"></label>
+                <br />
+                <input type="radio" class="radio" asp-for="SearchRatingType" value="@SearchRatingType.lessThan" checked="checked" /> Less Than<br />
+                <input type="radio" class="radio" asp-for="SearchRatingType" value="@SearchRatingType.greaterThan" /> Greater Than<br />
+                <span asp-validation-for="SearchRatingType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SearchAvgRating" class="control-label"></label>
+                <input asp-for="SearchAvgRating" class="form-control" />
+                <span asp-validation-for="SearchAvgRating" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Go Back Home</a>
+</div>
+

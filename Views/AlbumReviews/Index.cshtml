@@ -1,0 +1,91 @@
+﻿@model IEnumerable<spr21team24finalproject.Models.AlbumReview>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            @*<th>
+            @Html.DisplayNameFor(model => model.AlbumAvgRating)
+        </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.AlbumRating)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AlbumComment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AlbumReviewStatusType)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            @if (User.IsInRole("Manager") || User.IsInRole("Employee"))
+            {
+                @if (item.AlbumReviewStatusType == AlbumReviewStatus.Pending)
+                {
+                    <tr>
+                        @*<td>
+                            @Html.DisplayFor(modelItem => item.AlbumAvgRating)
+                        </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AlbumRating)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AlbumComment)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AlbumReviewStatusType)
+                        </td>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@item.AlbumReviewID">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.AlbumReviewID">Delete</a>|
+                            <a asp-action="Approve" asp-route-id="@item.AlbumReviewID">Approve</a>
+                              
+                        </td>
+                    </tr>
+                }
+
+
+
+                @if (item.AlbumReviewStatusType == AlbumReviewStatus.Approved)
+                {
+                    <tr>
+                        @*<td>
+                            @Html.DisplayFor(modelItem => item.AlbumAvgRating)
+                        </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AlbumRating)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AlbumComment)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AlbumReviewStatusType)
+                        </td>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@item.AlbumReviewID">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.AlbumReviewID">Delete</a>|
+                            @*@if (User.Identity.IsAuthenticated)
+                            {
+                                @if (User.IsInRole("Manager") || User.IsInRole("Employee"))
+                                {
+                                    <a asp-action="Approve" asp-route-id="@item.AlbumReviewID">Approve</a>
+                                }
+                            }*@
+                        </td>
+                    </tr>
+                }
+            }
+        }
+    </tbody>
+</table>

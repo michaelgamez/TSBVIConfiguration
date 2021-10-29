@@ -1,0 +1,45 @@
+﻿@model spr21team24finalproject.Models.Order
+@using spr21team24finalproject.Models
+@{
+    ViewData["Title"] = "MyMusic";
+}
+
+<h1>My Music</h1>
+
+
+
+<table class="table table-primary">
+    <tr>
+        <th>Song</th>
+        <th>Artist</th>
+        <th>Album</th>
+        <th>Rating</th>
+    </tr>
+    @foreach (SongOrderDetail od in Model.SongOrderDetails)
+    {
+        <tr>
+        <td>@Html.DisplayFor(ModelItem => od.Song.SongTitle)</td>
+        <td>@Html.DisplayFor(ModelItem => od.Song.Album.AlbumTitle)</td>
+        <td>@Html.DisplayFor(ModelItem => od.Song.Artist.ArtistName)</td>
+        <td>@Html.DisplayFor(ModelItem => od.Song.SongAvgRating)</td> 
+        </tr>
+    }
+</table>
+
+    <h5>My Albums</h5>
+    <table class="table table-primary">
+        <tr>
+            <th>Album</th>
+            <th>Artist</th>
+            <th>Rating</th>
+        </tr>
+        @*
+        @foreach (AlbumOrderDetail od in Model.AlbumOrderDetails)
+        {
+            <tr>
+                <td>@Html.DisplayFor(ModelItem => od.Album.AlbumTitle)</td>
+                <td>@Html.DisplayFor(ModelItem => od.Album.Artist.ArtistName)</td>
+                <td>@Html.DisplayFor(ModelItem => od.Album.AlbumAvgRating)</td>
+            </tr>
+        }*@
+    </table>

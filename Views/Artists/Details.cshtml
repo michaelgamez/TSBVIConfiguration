@@ -1,0 +1,82 @@
+﻿@model spr21team24finalproject.Models.Artist
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Artist</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ArtistName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ArtistName)
+        </dd>
+
+
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ArtistAvgRating)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ArtistAvgRating)
+        </dd>
+
+
+        
+    </dl>
+    <table class="table table-striped">
+        <tr>
+            <th>Artist's Reviews</th>
+        </tr>
+        @foreach (ArtistReview artistreview in Model.ArtistReviews)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => artistreview.ArtistComment)</td>
+            </tr>
+        }
+    </table>
+
+    <table class="table table-striped">
+        <tr>
+            <th>Artist's Albums</th>
+        </tr>
+        @foreach (Album album in Model.Albums)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => album.AlbumTitle)</td>
+                <td>@Html.ActionLink("Album Info", "Details", "Albums", new { id = album.AlbumID })</td>
+            </tr>
+            
+        }
+    </table>
+    <table class="table table-striped">
+        <tr>
+            <th>Artist's Songs</th>
+        </tr>
+        @foreach (Song song in Model.Songs)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => song.SongTitle)</td>
+                <td>@Html.ActionLink("Song Info", "Details", "Songs", new { id = song.SongID })</td>
+            </tr>
+           
+        }
+    </table>
+</div>
+
+
+<div>
+    <a asp-action="ArtistDetailedSearch" asp-controller="Home">New Search</a> |
+    <a asp-action="Index" asp-controller="Home">Back to Home</a>
+    @if (User.Identity.IsAuthenticated && (User.IsInRole("Employee") || User.IsInRole("Manager")))
+    {
+        <span>|</span>
+        <a asp-action="Edit" asp-route-id="@Model.ArtistID">Edit</a>
+    }
+
+</div>

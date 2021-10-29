@@ -1,0 +1,82 @@
+﻿@model spr21team24finalproject.Models.Order
+
+@{
+    ViewData["Title"] = "OrderSummary";
+}
+
+<h1>ORDER SUMMARY</h1>
+
+IGNORE
+
+<h1>CART</h1>
+
+<h4>Current Order</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="BillingAndDelivery">
+            @Html.HiddenFor(model => model.OrderID)
+
+            <h5>Order Summary: Songs</h5>
+            <table class="table table-primary">
+                <tr>
+                    <th>Song</th>
+                    <th>Artist</th>
+                    <th>Album</th>
+                    <th>Price</th>
+                </tr>
+                @foreach (SongOrderDetail od in Model.SongOrderDetails)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(ModelItem => od.Song.SongTitle)</td>
+                        <td>@Html.DisplayFor(ModelItem => od.Song.Artist.ArtistName)</td>
+                        <td>@Html.DisplayFor(ModelItem => od.Song.Album.AlbumTitle)</td>
+                        <td>@Html.DisplayFor(ModelItem => od.Song.SongDiscountPrice)</td>
+                    </tr>
+                }
+            </table>
+
+            <h5>Order Summary: Albums</h5>
+            <table class="table table-primary">
+                <tr>
+                    <th>Album</th>
+                    <th>Artist</th>
+                    <th>Price</th>
+                </tr>
+                @foreach (AlbumOrderDetail od in Model.AlbumOrderDetails)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(ModelItem => od.Album.AlbumTitle)</td>
+                        <td>@Html.DisplayFor(ModelItem => od.Album.Artist.ArtistName)</td>
+                        <td>@Html.DisplayFor(ModelItem => od.Album.AlbumDiscountPrice)</td>
+                    </tr>
+                }
+            </table>
+
+
+
+            @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="OrderNumber" class="control-label"></label>
+            <span asp-validation-for="OrderNumber" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="OrderDate" class="control-label"></label>
+            <span asp-validation-for="OrderDate" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="StatusType" class="control-label"></label>
+            <span asp-validation-for="StatusType" class="text-danger"></span>
+        </div>*@
+            <div class="form-group">
+                <input type="submit" value="Go to Step 2" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Billing" asp-route-id="@Model.OrderID">Next Step: Billing and Delivery </a> |
+
+</div>
+

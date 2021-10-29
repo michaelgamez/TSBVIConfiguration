@@ -1,0 +1,89 @@
+﻿@model spr21team24finalproject.Models.Song
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Song</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SongTitle)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SongTitle)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Artist.ArtistName)
+        </dt>
+        <dd class="col-sm-10">
+            <div>
+                @Html.DisplayFor(model => model.Artist.ArtistName)
+                <td>
+                    | <a asp-action="Details" asp-controller="Artists" asp-route-id="@Model.Artist.ArtistID">Artist Information</a>
+                </td>
+            </div>
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Album.AlbumTitle)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Album.AlbumTitle)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Genre.GenreName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Genre.GenreName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SongOriginalPrice)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SongOriginalPrice)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SongDiscountPrice)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SongDiscountPrice)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SongAvgRating)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SongAvgRating)
+        </dd>
+
+    </dl>
+    <table class="table table-striped">
+        <tr>
+            <th>Song's Reviews</th>
+        </tr>
+        @foreach (SongReview songreview in Model.SongReviews)
+        {
+            @if(songreview.SongReviewStatusType == SongReviewStatus.Approved)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => songreview.SongComment)</td>
+                </tr>
+            }
+        }
+    </table>
+</div>
+<div>
+    <td>
+        <a asp-action="Create" asp-controller="SongOrderDetails" asp-route-id="@Model.SongID">Add to Order</a> |
+    </td>
+    <a asp-action="SongDetailedSearch" asp-controller="Home">New Search</a> |
+    <a asp-action="Index" asp-controller="Home">Back to Home</a>
+    @if (User.Identity.IsAuthenticated && (User.IsInRole("Employee") || User.IsInRole("Manager")))
+    {
+        <span>|</span>
+        <a asp-action="Edit" asp-route-id="@Model.SongID">Edit</a>
+    }
+</div>
